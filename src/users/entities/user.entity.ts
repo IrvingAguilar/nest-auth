@@ -1,5 +1,6 @@
 import { Coffee } from 'src/coffees/entities/coffee.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Role } from './../enums/role.enum';
 
 @Entity('users')
 export class User {
@@ -19,6 +20,14 @@ export class User {
     name: 'password',
   })
   password: string;
+
+  @Column({
+    name: 'role',
+    type: 'enum',
+    enum: Role,
+    default: Role.Regular,
+  })
+  role: Role;
 
   @OneToMany(() => Coffee, (coffee) => coffee.user)
   coffees: Coffee[];
